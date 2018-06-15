@@ -43,7 +43,8 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return false;
+        logger.info("preHandle请求："+request.getRequestURI());
+        return true;
     }
 
     /**
@@ -60,7 +61,6 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
      *
      * @param request      current HTTP request
      * @param response     current HTTP response
-     * @param handler      handler (or {@link HandlerMethod}) that started asynchronous
      *                     execution, for type and/or instance examination
      * @param modelAndView the {@code ModelAndView} that the handler returned
      *                     (can also be {@code null})
@@ -68,7 +68,7 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+        logger.info("postHandle："+request.getRequestURI());
     }
 
     /**
@@ -86,13 +86,12 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
      *
      * @param request  current HTTP request
      * @param response current HTTP response
-     * @param handler  handler (or {@link HandlerMethod}) that started asynchronous
      *                 execution, for type and/or instance examination
      * @param ex       exception thrown on handler execution, if any
      * @throws Exception in case of errors
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        logger.info("afterCompletion："+request.getRequestURI());
     }
 }
