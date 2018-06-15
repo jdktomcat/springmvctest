@@ -1,6 +1,7 @@
 package com.vivo.tq.mvc.interceptor;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,11 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2018-06-15
  */
 public class MyHandlerInterceptor implements HandlerInterceptor {
+
+    /**
+     * 日志
+     */
+    private static final Logger logger = Logger.getLogger(MyHandlerInterceptor.class);
 
     /**
      * Intercept the execution of a handler. Called after HandlerMapping determined
