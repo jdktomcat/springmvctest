@@ -20,9 +20,9 @@ public class OverallExceptionResolver {
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
     public void resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, MissingServletRequestParameterException ex) throws Exception {
-        System.out.println(ex.getMessage());
         response.setContentType("text/json; charset=UTF-8");
         ExceptionBean exceptionBean = new ExceptionBean();
+        exceptionBean.setMessage(ex.getMessage());
         exceptionBean.setClassName(handler.getClass().getName());
         exceptionBean.setUri(request.getRequestURI());
         exceptionBean.setParam(request.getParameterMap());

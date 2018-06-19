@@ -10,13 +10,33 @@ import java.util.Map;
  */
 public class ExceptionBean {
 
+    /**
+     * 异常信息
+     */
+    private String message;
+
+    /**
+     * 请求处理类
+     */
     private String className;
 
+    /**
+     * 请求路径
+     */
     private String uri;
 
+    /**
+     * 请求参数
+     */
     private Map<String,Object> param;
 
-    public ExceptionBean() {
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getClassName() {
