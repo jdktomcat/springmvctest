@@ -23,6 +23,7 @@ public class OverallExceptionResolver {
         response.setContentType("text/json; charset=UTF-8");
         ExceptionBean exceptionBean = new ExceptionBean();
         exceptionBean.setMessage(ex.getMessage());
+        exceptionBean.setRemoteHost(request.getRemoteAddr());
         exceptionBean.setClassName(handler.getClass().getName());
         exceptionBean.setUri(request.getRequestURI());
         exceptionBean.setParam(request.getParameterMap());

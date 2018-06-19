@@ -16,6 +16,11 @@ public class ExceptionBean {
     private String message;
 
     /**
+     * 远程IP
+     */
+    private String remoteHost;
+
+    /**
      * 请求处理类
      */
     private String className;
@@ -61,5 +66,13 @@ public class ExceptionBean {
 
     public void setParam(Map<String, Object> param) {
         this.param = param;
+    }
+
+    public String getRemoteHost() {
+        return remoteHost;
+    }
+
+    public void setRemoteHost(String remoteHost) {
+        this.remoteHost = remoteHost;
     }
 }
