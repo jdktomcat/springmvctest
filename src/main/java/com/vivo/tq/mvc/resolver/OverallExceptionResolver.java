@@ -1,5 +1,8 @@
 package com.vivo.tq.mvc.resolver;
 
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author 汤旗
  * @date 2018-06-19
  */
+@ControllerAdvice
 public class OverallExceptionResolver implements HandlerExceptionResolver {
 
     /**
@@ -30,11 +34,10 @@ public class OverallExceptionResolver implements HandlerExceptionResolver {
      * for default processing
      */
     @Override
+    @ExceptionHandler({MissingServletRequestParameterException.class})
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         System.out.println(ex.getMessage());
-        ModelAndView modelAndView = new ModelAndView();
-        //跳转到相应的处理页面
-        modelAndView.setViewName("error");
+        ModelAndView modelAndView = new ModelAndView("jsonView");
         return modelAndView;
     }
 }
