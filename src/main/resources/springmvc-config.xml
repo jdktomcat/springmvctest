@@ -12,6 +12,7 @@
     <mvc:annotation-driven/>
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+        <bean class="com.vivo.tq.mvc.interceptor.MyHandlerInterceptor"/>
     </mvc:interceptors>
     
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
@@ -30,12 +31,4 @@
         <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->
         <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
-    
-    <map:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/*"/>
-            <bean class="com.vivo.tq.mvc.interceptor.MyHandlerInterceptor"/>
-        </mvc:interceptor>
-    </map:interceptors>
-
 </beans>
