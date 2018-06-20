@@ -19,12 +19,11 @@ import java.io.PrintWriter;
 public class OverallExceptionResolver {
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public void resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, MissingServletRequestParameterException ex) throws Exception {
+    public void resolveException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
         response.setContentType("text/json; charset=UTF-8");
         ExceptionBean exceptionBean = new ExceptionBean();
         exceptionBean.setMessage(ex.getMessage());
         exceptionBean.setRemoteHost(request.getRemoteAddr());
-        exceptionBean.setClassName(handler.getClass().getName());
         exceptionBean.setUri(request.getRequestURI());
         exceptionBean.setParam(request.getParameterMap());
         PrintWriter out = response.getWriter();
