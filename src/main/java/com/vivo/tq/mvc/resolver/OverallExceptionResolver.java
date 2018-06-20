@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * @author 汤旗
  * @date 2018-06-19
  */
-@ControllerAdvice
+@ControllerAdvice(basePackages="com.vivo.tq.mvc.controller")
 public class OverallExceptionResolver {
 
     @ExceptionHandler({MissingServletRequestParameterException.class})
