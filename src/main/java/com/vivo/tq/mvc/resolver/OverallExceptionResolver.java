@@ -15,12 +15,26 @@ import java.io.PrintWriter;
  * @author 汤旗
  * @date 2018-06-19
  */
-@ControllerAdvice(basePackages="com.vivo.tq.mvc.controller")
+@ControllerAdvice(basePackages = "com.vivo.tq.mvc.controller")
 public class OverallExceptionResolver {
 
+    private static final String CONTENT_TYPE = "text/json; charset=UTF-8";
+
+//    @ExceptionHandler({Exception.class})
+//    public void resolveException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
+////        response.setContentType(CONTENT_TYPE);
+////        ExceptionBean exceptionBean = new ExceptionBean();
+////        exceptionBean.setMessage(ex.getMessage());
+////        exceptionBean.setRemoteHost(request.getRemoteAddr());
+////        exceptionBean.setUri(request.getRequestURI());
+////        exceptionBean.setParam(request.getParameterMap());
+////        PrintWriter out = response.getWriter();
+////        out.print(JSONObject.toJSONString(exceptionBean));
+//    }
+
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public void resolveException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
-        response.setContentType("text/json; charset=UTF-8");
+    public void resolveSubException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
+        response.setContentType(CONTENT_TYPE);
         ExceptionBean exceptionBean = new ExceptionBean();
         exceptionBean.setMessage(ex.getMessage());
         exceptionBean.setRemoteHost(request.getRemoteAddr());
