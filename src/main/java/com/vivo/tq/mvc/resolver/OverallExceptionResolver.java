@@ -1,13 +1,11 @@
 package com.vivo.tq.mvc.resolver;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 /**
  * 类描述：异常解决
@@ -18,29 +16,25 @@ import java.io.PrintWriter;
 @ControllerAdvice(basePackages = "com.vivo.tq.mvc.controller")
 public class OverallExceptionResolver {
 
-    private static final String CONTENT_TYPE = "text/json; charset=UTF-8";
-
-//    @ExceptionHandler({Exception.class})
-//    public void resolveException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
-////        response.setContentType(CONTENT_TYPE);
-////        ExceptionBean exceptionBean = new ExceptionBean();
-////        exceptionBean.setMessage(ex.getMessage());
-////        exceptionBean.setRemoteHost(request.getRemoteAddr());
-////        exceptionBean.setUri(request.getRequestURI());
-////        exceptionBean.setParam(request.getParameterMap());
-////        PrintWriter out = response.getWriter();
-////        out.print(JSONObject.toJSONString(exceptionBean));
-//    }
-
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public void resolveSubException(HttpServletRequest request, HttpServletResponse response, MissingServletRequestParameterException ex) throws Exception {
-        response.setContentType(CONTENT_TYPE);
+    @ResponseBody
+    public ExceptionBean resolveSubException(HttpServletRequest request, MissingServletRequestParameterException ex) {
+        return getExceptionBean(request, ex);
+    }
+
+    @ExceptionHandler({Exception.class})
+    @ResponseBody
+    public ExceptionBean resolveException(HttpServletRequest request, Exception ex) {
+        return getExceptionBean(request, ex);
+    }
+
+    private ExceptionBean getExceptionBean(HttpServletRequest request, Exception ex) {
         ExceptionBean exceptionBean = new ExceptionBean();
         exceptionBean.setMessage(ex.getMessage());
         exceptionBean.setRemoteHost(request.getRemoteAddr());
         exceptionBean.setUri(request.getRequestURI());
         exceptionBean.setParam(request.getParameterMap());
-        PrintWriter out = response.getWriter();
-        out.print(JSONObject.toJSONString(exceptionBean));
+        return exceptionBean;
     }
+
 }
