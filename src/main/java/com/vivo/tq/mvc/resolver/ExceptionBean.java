@@ -1,6 +1,8 @@
 package com.vivo.tq.mvc.resolver;
 
+import java.io.Serializable;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * 类描述：异常信息类
@@ -8,7 +10,7 @@ import java.util.Map;
  * @author 汤旗
  * @date 2018-06-19
  */
-public class ExceptionBean {
+public class ExceptionBean implements Serializable {
 
     /**
      * 异常信息
@@ -74,5 +76,16 @@ public class ExceptionBean {
 
     public void setRemoteHost(String remoteHost) {
         this.remoteHost = remoteHost;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ExceptionBean.class.getSimpleName() + "[", "]")
+                .add("message='" + message + "'")
+                .add("remoteHost='" + remoteHost + "'")
+                .add("className='" + className + "'")
+                .add("uri='" + uri + "'")
+                .add("param=" + param)
+                .toString();
     }
 }
